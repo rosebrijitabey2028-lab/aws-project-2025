@@ -1,23 +1,25 @@
-# AWS Project Deployment
+AWS Project Deployment
 
-## 🚀 Project Overview
+🚀 Project Overview
 
 This repository contains the infrastructure configuration and deployment logic for a scalable, event-driven data pipeline designed to ingest, transform, and store real-time IoT sensor data using AWS Kinesis and DynamoDB.
 
-## 🛠 Prerequisites
+🛠 Prerequisites
 
-1.  **AWS Account:** A fully activated AWS account.
-2.  **AWS CLI:** Configured and installed locally.
-3.  **IAM Role:** An IAM Role named `ProjectDeployerRole` with the policy defined in `iam-deployer-policy.json` attached.
-4.  **Deployment Tool:** [E.g., Terraform, Serverless Framework, or AWS CLI scripts].
+AWS Account: A fully activated AWS account.
 
-## 🚧 Current Blocker: Account Activation
+AWS CLI: Configured and installed locally.
 
-The primary blocker preventing deployment and infrastructure setup is an issue with the AWS root account activation. **No infrastructure deployment can proceed until AWS Support resolves the verification error.**
+Deployment Tool: [E.g., Terraform, Serverless Framework, or AWS CLI scripts].
 
-## ⚙️ Initial Setup (Post-Activation)
+🚧 Current Blocker: New Account Activation
 
-Once the AWS account is active:
+The primary blocker preventing deployment and infrastructure setup is the creation and activation of a new AWS root account. No infrastructure deployment can proceed until the new account is fully set up and verified.
 
-1.  **Create IAM Policy:** Use the JSON document provided in `iam-deployer-policy.json` to create a new Policy in the IAM console.
-2.  **Create IAM Role:** Create an IAM Role (e.g., `ProjectDeployerRole`) and attach the policy created in Step 1.
+⚙️ Initial Next Steps (Post-Activation)
+
+Once the new AWS account is active and you have confirmed root access:
+
+Review Security: Immediately configure Multi-Factor Authentication (MFA) on the root user.
+
+Create Admin User: Create a dedicated IAM user for daily administrative tasks.
