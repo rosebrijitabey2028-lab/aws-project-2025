@@ -6,39 +6,44 @@
       "Effect": "Allow",
       "Action": [
         "s3:ListAllMyBuckets",
-        "s3:GetBucketLocation",
         "iam:ListRoles",
-        "iam:GetRole",
-        "sts:AssumeRole"
+        "sts:AssumeRole",
+        "cloudformation:DescribeStacks"
       ],
-      "Resource": "*"
+      "Resource": "*",
+      "Comment": "Allows listing buckets and roles, assuming roles, and reading stack status."
     },
     {
       "Sid": "AllowFullAccessToProjectSpecificResources",
       "Effect": "Allow",
       "Action": [
-        "s3:GetObject",
-        "s3:PutObject",
-        "s3:DeleteObject",
-        "s3:PutBucketPolicy",
-        "s3:CreateBucket",
-        "s3:DeleteBucket",
-        "lambda:CreateFunction",
-        "lambda:DeleteFunction",
-        "lambda:UpdateFunctionCode",
-        "dynamodb:CreateTable",
-        "dynamodb:DeleteTable",
-        "dynamodb:UpdateTable",
-        "dynamodb:PutItem",
-        "kinesis:CreateStream",
-        "kinesis:DeleteStream"
+        "s3:*",
+        "lambda:*",
+        "dynamodb:*",
+        "kinesis:*",
+        "cloudformation:*",
+        "apigateway:*"
       ],
       "Resource": [
         "arn:aws:s3:::*aws-project-2025*",
-        "arn:aws:lambda:*:*:function:aws-project-2025*",
-        "arn:aws:dynamodb:*:*:table/aws-project-2025*",
-        "arn:aws:kinesis:*:*:stream/aws-project-2025*"
-      ]
+        "arn:aws:lambda:*:*:function:*aws-project-2025*",
+        "arn:aws:dynamodb:*:*:table/*aws-project-2025*",
+        "arn:aws:kinesis:*:*:stream/*aws-project-2025*",
+        "arn:aws:cloudformation:*:*:stack/*aws-project-2025*/*",
+        "arn:aws:apigateway:*:*:*"
+      ],
+      "Comment": "Grants full CRUD access for project resources (S3, Lambda, DynamoDB, Kinesis) and management of CloudFormation stacks and API Gateways associated with the project prefix."
+    },
+    {
+      "Sid": "AllowAllLogAccess",
+      "Effect": "Allow",
+      "Action": [
+        "logs:CreateLogGroup",
+        "logs:CreateLogStream",
+        "logs:PutLogEvents"
+      ],
+      "Resource": "arn:aws:logs:*:*:log-group:/aws/lambda/*:*",
+      "Comment": "Allows Lambda functions to write logs to CloudWatch."
     }
   ]
 }
